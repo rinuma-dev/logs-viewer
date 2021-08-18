@@ -5,7 +5,7 @@
 
 // create database DATALOG
 
-    $sql = "CREATE DATABASE IF NOT EXISTS datalognew ";
+    $sql = "CREATE DATABASE IF NOT EXISTS datalog ";
     if ($conn->query($sql) === TRUE) {
       echo "Database created successfully";
     } else {

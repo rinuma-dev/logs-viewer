@@ -41,19 +41,19 @@ function indexingUwsgiElastic($client, $json)
         
         // print_r($response);
     };
-
-    function getIndex($client)
-    {
-        $searchParams = [];
-        $searchParams = [];
-        $searchParams['index'] = 'log_uwsgi';
-        $searchParams['type'] = 'log_uwsgi';
-        // this is how you specify a query in ES
-        $searchParams['body']['query']['match']['_all'] = 'my_query';
-        $searchParams['body']['sort'] = ['_score'];
-        // the actual query. Results are stored in a PHP array
-        $retDoc = $client->search($searchParams);
-    }
-};
+}
+//     function getIndex($client)
+//     {
+//         $searchParams = [];
+//         $searchParams = [];
+//         $searchParams['index'] = 'log_uwsgi';
+//         $searchParams['type'] = 'log_uwsgi';
+//         // this is how you specify a query in ES
+//         $searchParams['body']['query']['match']['_all'] = 'my_query';
+//         $searchParams['body']['sort'] = ['_score'];
+//         // the actual query. Results are stored in a PHP array
+//         $retDoc = $client->search($searchParams);
+//     }
+// };
 indexingUwsgiElastic($client, $JsonUwsgi);
 // getIndex($client);
