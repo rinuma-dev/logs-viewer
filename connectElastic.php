@@ -4,6 +4,7 @@ use Elasticsearch\ClientBuilder;
 
 require 'vendor/autoload.php';
 require './connectRedis.php';
+
 $JsonUwsgi = file_get_contents("json/uwsgi.json");
 $JsonUwsgi = json_decode($JsonUwsgi, true);
 
@@ -33,7 +34,7 @@ function indexingUwsgiElastic($client, $json)
         );
         if($index % 100 === 0){
             $response = $client->bulk($params);
-            print_r($response);
+            // print_r($response);
             $params = array();
             unset($response);
         }
@@ -42,18 +43,30 @@ function indexingUwsgiElastic($client, $json)
         // print_r($response);
     };
 }
-//     function getIndex($client)
-//     {
-//         $searchParams = [];
-//         $searchParams = [];
-//         $searchParams['index'] = 'log_uwsgi';
-//         $searchParams['type'] = 'log_uwsgi';
-//         // this is how you specify a query in ES
-//         $searchParams['body']['query']['match']['_all'] = 'my_query';
-//         $searchParams['body']['sort'] = ['_score'];
-//         // the actual query. Results are stored in a PHP array
-//         $retDoc = $client->search($searchParams);
-//     }
-// };
-indexingUwsgiElastic($client, $JsonUwsgi);
-// getIndex($client);
+
+function getDataByid( $client, $index, $type, $id){
+    $params['index'] = $index;
+    $params['type'] = $type;
+    $params['id'] = $id; 
+
+    $result = $client->get($params);
+    // var_dump($result);
+    return $result;
+};
+
+function getDatabySize($client, $index, $type, $size){
+    $params = array();
+    $params['index'] = $index;
+    $params['type'] = $type;
+    $params['size'] = $size;
+    $params['body']['query']['match_all']= new \stdClass();
+    
+    $result = $client->search($params);
+    var_dump($result);
+    return $result;
+};   
+
+
+// indexingUwsgiElastic($client, $JsonUwsgi);
+getDataByid($client,'log_uwsgi','log_uwsgi',405);
+getDatabySize($client,'log_uwsgi','log_uwsgi',100);
