@@ -1,6 +1,7 @@
 <?php
 $pattern = '/([0-9][0-9$MB]+)/';
 //([0-9\/]+)
+//'/([0-9][0-9$MB]+)/'
 $file = fopen("./data_log/uwsgi.log", "r") or die("Unable to open file!");
 $columns = array(
     'address_space_usage', 'address_space', 'rss_usage', 'rss', 'pid', 'app', 'req'
@@ -63,7 +64,7 @@ function logToJson($file, $pattern, $columns){
        
 
         if ($matches_check === true) {
-            $result = setColumnArray($columns, $matches);
+            $result = setColumnArray($matches, $columns);
             $result['id'] = $indexOfResults;
             $results[$indexOfResults] = $result;
             $indexOfResults++;
