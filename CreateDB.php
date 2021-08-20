@@ -7,14 +7,14 @@
 
     $sql = "CREATE DATABASE IF NOT EXISTS datalog ";
     if ($conn->query($sql) === TRUE) {
-      echo "Database created successfully";
+      echo "Database created successfully \n";
     } else {
-      echo "Error creating database: " . $conn->error;
+      echo "Error creating database: \n" . $conn->error;
     }
 
    
 // create table nginx_log
-    $sql = "CREATE TABLE IF NOT EXISTS nginx_log (
+    $sql_table_nginx = "CREATE TABLE IF NOT EXISTS nginx_log (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         remote_address VARCHAR(15),
         remote_user VARCHAR(15),
@@ -35,22 +35,27 @@
       }
 
 
+
+   
 // create tabel uwsgi
     $sql_table_uwsgi = "CREATE TABLE IF NOT EXISTS uwsgi_log (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        address_space_usage VARCHAR(15),
-        address_space VARCHAR(8),
-        rss_usage VARCHAR(15),
-        rss VARCHAR(30),
+        address_space_usage VARCHAR(30),
+        address_space_used VARCHAR (25),
+        address_space_size VARCHAR(8),
+        rss_usage VARCHAR (30),
+        rss_used VARCHAR(15),
+        rss_size VARCHAR(30),
+        
         pid VARCHAR(15),
         app VARCHAR(10),
         req VARCHAR(5)
     )";
 
 if ($connDB->query($sql_table_uwsgi) === TRUE) {
-    echo "Database uwsgi created successfully";
+    echo "Database uwsgi created successfully \n";
   } else {
-    echo "Error creating database: " . $conn->error;
+    echo "Error creating database: \n" . $conn->error;
   }
 
       $conn->close();

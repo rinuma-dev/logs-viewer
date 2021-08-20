@@ -4,7 +4,7 @@ $pattern = '/([0-9][0-9$MB]+)/';
 //'/([0-9][0-9$MB]+)/'
 $file = fopen("./data_log/uwsgi.log", "r") or die("Unable to open file!");
 $columns = array(
-    'address_space_usage', 'address_space', 'rss_usage', 'rss', 'pid', 'app', 'req'
+    'address_space_used', 'address_space_size',  'rss_used', 'rss_size', 'pid', 'app', 'req','address_space_usage', 'rss_usage'
 );
 
 
@@ -21,6 +21,17 @@ function isContainWord($data, $word){
         return false;
     }
 }
+
+function appendString($start,$end){
+    $newString = $start. " / " .$end;
+    return $newString;
+}
+
+function addWord($data){
+    $newString = $data. "bytes";
+    return $newString;
+}
+
 
 //set Object Length to length of column
 function setObjectLength($matches, $columns){
@@ -61,6 +72,12 @@ function logToJson($file, $pattern, $columns){
         $matches = pregMatch($pattern, $line);
         $matches = setObjectLength($matches, $columns);
         $matches_check = isContainWord($matches[1], 'MB');
+
+        // add new value to array
+        $matches[0] =addWord($matches[0]);
+        $matches[2] =addWord($matches[2]);
+        $matches[8] = appendString($matches[0],$matches[1]);
+        $matches[9] = appendString($matches[2],$matches[3]);
        
 
         if ($matches_check === true) {

@@ -14,10 +14,12 @@ include './assets/component/head_nav.php'
         <table id="example" class="display wrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Address space usage(bytes)</th>
-                    <th>Address space (MB)</th>
-                    <th>Rss usage (bytes</th>
-                    <th>Rss total (MB)</th>
+                    <th>Address space usage</th>
+                    <th>Address space used</th>
+                    <th>Address space size</th>
+                    <th>Rss space</th>
+                    <th>Rss used</th>
+                    <th>Rss size</th>
                     <th>Pid</th>
                     <!-- <th>App</th>
                     <th>Req</th> -->
@@ -29,9 +31,11 @@ include './assets/component/head_nav.php'
                 ?>
                     <tr>
                         <td><?php echo $log['address_space_usage'] ?></td>
-                        <td><?php echo $log['address_space'] ?></td>
+                        <td><?php echo $log['address_space_used'] ?></td>
+                        <td><?php echo $log['address_space_size'] ?></td>
                         <td><?php echo $log['rss_usage'] ?></td>
-                        <td><?php echo $log['rss'] ?></td>
+                        <td><?php echo $log['rss_used'] ?></td>
+                        <td><?php echo $log['rss_size'] ?></td>
                         <td><?php echo $log['pid'] ?></td>
                         <!-- <td><?php echo $log['app'] ?></td>
                         <td><?php echo $log['req'] ?></td> -->
